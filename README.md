@@ -7,4 +7,4 @@ rosrun laserScanToPointCloud2 tiltForPointCloud.py
 rosservice call laserScanToPointCloud2 
 ```
 
-TODO: currenlt
+TODO: make robot namespace generic vs scout_1
