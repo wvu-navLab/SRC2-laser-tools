@@ -1,2 +1,6 @@
+std_msgs/Float64 minAngle
+std_msgs/Float64 maxAngle
+std_msgs/Int16 numAngleSteps
+std_msgs/Int16 numRepeat
 ---
 sensor_msgs/PointCloud2 cloud
