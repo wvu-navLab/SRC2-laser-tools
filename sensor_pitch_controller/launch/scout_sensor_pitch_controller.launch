@@ -1,0 +1,12 @@
+<launch> 
+  <group ns="scout_1">
+    
+    <node pkg="sensor_pitch_controller"
+          name="sensor_pitch_controller"
+          type="sensor_pitch_controller"
+          output="screen">
+    </node>
+    
+  </group>
+
+</launch>
