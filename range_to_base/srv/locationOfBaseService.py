@@ -3,7 +3,7 @@
 import rospy
 import sensor_msgs.point_cloud2 as pc2
 from geometry_msgs.msg import Pose
-from sensor_msgs.msg import Point
+from geometry_msgs.msg import Point
 from sensor_msgs.msg import PointCloud2
 #import laser_geometry.laser_geometry as lg
 import math
@@ -52,7 +52,7 @@ def range(mess):
     # call the point cloud
     rospy.wait_for_service("/scout_1/scan_to_cloud")
     clouder = rospy.ServiceProxy("/scout_1/scan_to_cloud", ScanToPointCloud2);
-    resp_cloud = clouder(mess.angle,mess.angle, 1, 10);
+    resp_cloud = clouder(mess.angle,mess.angle, 3, 1);
 
 
     # convert it to a generator of the individual points
@@ -90,7 +90,7 @@ def range(mess):
         print 'Time: %5.2f Rad: %5.2f cen: %5.2f %5.2f Res: %5.2f'%(resp_cloud.cloud.header.stamp.to_sec(),R_avg, np.mean(xc_2), np.mean(yc_2),residu_2)
         locationMeas.x =  np.mean(xc_2)
         locationMeas.y =  np.mean(yc_2)
-        rangeMeas.header.stamp = rospy.Time.now()
+        
 	# check for 'goodness of fit' by looking at size of radius, residuals, x, y
 	if residu_2<1000:
 		returnVal=locationMeas
@@ -105,8 +105,8 @@ def range(mess):
 	
 
 
-rospy.init_node('range_to_base')
+rospy.init_node('location_of_base')
 
-service=rospy.Service('range_to_base_service',RangeToBase,range)
+service=rospy.Service('location_of_base_service',LocationOfBase,range)
 
 rospy.spin()

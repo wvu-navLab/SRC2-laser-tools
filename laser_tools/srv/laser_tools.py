@@ -13,18 +13,23 @@ def tiltLidar(mess):
     print rospy.get_param(node+"/sensor_control_topic_name")
     pub = rospy.Publisher(rospy.get_param(node+"/sensor_control_topic_name"),Float64, queue_size=1)
     pub_cloud = rospy.Publisher(rospy.get_param(node+"/cloud_topic_name"),PointCloud2, queue_size=1)
-    startTime = rospy.get_rostime()
+    
     minAngle = float(mess.minAngle)
     maxAngle = float(mess.maxAngle)
     steps = mess.numAngleSteps
     repeat = mess.numRepeat
     angleIncrement = (maxAngle-minAngle)/float(steps);
+    print angleIncrement
     for j in range(repeat):
         Angle = minAngle
         for i in range(steps):
             pub.publish(Angle);
+            rospy.sleep(2.0)
+            if(j==0 and i ==0):
+                startTime = rospy.get_rostime()
+            print Angle
+            print steps
             Angle=Angle + angleIncrement
-            rospy.sleep(.1)
 
     endTime = rospy.get_rostime();
     pub.publish(0.0);
