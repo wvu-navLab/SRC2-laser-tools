@@ -3,14 +3,14 @@
 import rospy
 import sensor_msgs.point_cloud2 as pc2
 from geometry_msgs.msg import Pose
-from sensor_msgs.msg import Range
+from sensor_msgs.msg import Point
 from sensor_msgs.msg import PointCloud2
 #import laser_geometry.laser_geometry as lg
 import math
 from scipy import optimize
 import numpy as np
 
-from range_to_base.srv import RangeToBase, RangeToBaseResponse
+from range_to_base.srv import LocationOfBase, LocationOfBaseResponse
 from laser_tools_src2.srv import ScanToPointCloud2
 
 ####### circle fit code ##########
@@ -57,7 +57,7 @@ def range(mess):
 
     # convert it to a generator of the individual points
     point_generator = pc2.read_points(resp_cloud.cloud)
-    rangeMeas = Range()
+    locationMeas = Point()
 
     # we can access a generator in a loop
 
@@ -88,17 +88,18 @@ def range(mess):
 	xx=np.mean(xc_2)
 	yy=np.mean(yc_2)
         print 'Time: %5.2f Rad: %5.2f cen: %5.2f %5.2f Res: %5.2f'%(resp_cloud.cloud.header.stamp.to_sec(),R_avg, np.mean(xc_2), np.mean(yc_2),residu_2)
-        rangeMeas.range =  np.sqrt(np.mean(xc_2)**2+np.mean(yc_2)**2)
+        locationMeas.x =  np.mean(xc_2)
+        locationMeas.y =  np.mean(yc_2)
         rangeMeas.header.stamp = rospy.Time.now()
 	# check for 'goodness of fit' by looking at size of radius, residuals, x, y
 	if residu_2<1000:
-		returnVal=rangeMeas
+		returnVal=locationMeas
                 return returnVal
         else:
                 
-                rangeMeas.range = 999.99
-
-                returnVal=rangeMeas
+                locationMeas.x = 999.99
+                locationMeas.y = 999.99
+                returnVal=locationMeas
                 return returnVal
 
 	

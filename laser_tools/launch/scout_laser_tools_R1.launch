@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
+
 <launch>
+    <include file="$(find laser_tools_src2)/launch/scout_scan_assemble_R1.launch"/>	
     <param name="/use_sim_time" value="true"/>
     <node name="laser_tools" pkg="laser_tools_src2" type="laser_tools.py" output="screen">
       <rosparam
