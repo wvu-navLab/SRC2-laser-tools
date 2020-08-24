@@ -18,6 +18,8 @@ from laser_tools_src2.srv import ScanToPointCloud2
 # define x,y globally
 x=np.empty(0)
 y=np.empty(0)
+pub = rospy.publisher("base_location", Point, queue_size=10)
+
 def calc_R(xc, yc):
     """ calculate the distance of each data points from the center (xc, yc) """
 
@@ -43,15 +45,15 @@ def Df_2b(c):
 
 
 def range(mess):
-    global x,y,returnVal
+    global x,y,returnVal,pub
 
 
     # call rotate in place service
 
     
     # call the point cloud
-    rospy.wait_for_service("/scout_1/scan_to_cloud")
-    clouder = rospy.ServiceProxy("/scout_1/scan_to_cloud", ScanToPointCloud2);
+    rospy.wait_for_service("scan_to_cloud")
+    clouder = rospy.ServiceProxy("scan_to_cloud", ScanToPointCloud2);
     resp_cloud = clouder(mess.angle,mess.angle, 3, 1);
 
 
@@ -94,6 +96,7 @@ def range(mess):
 	# check for 'goodness of fit' by looking at size of radius, residuals, x, y
 	if residu_2<1000:
 		returnVal=locationMeas
+                pub.publish(locationMeas)
                 return returnVal
         else:
                 
