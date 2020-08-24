@@ -18,7 +18,7 @@ from laser_tools_src2.srv import ScanToPointCloud2
 # define x,y globally
 x=np.empty(0)
 y=np.empty(0)
-pub = rospy.publisher("base_location", Point, queue_size=10)
+pub = rospy.Publisher("base_location", Point, queue_size=10)
 
 def calc_R(xc, yc):
     """ calculate the distance of each data points from the center (xc, yc) """
