@@ -13,11 +13,11 @@
 SensorPitchController::SensorPitchController(ros::NodeHandle & nh)
 : nh_(nh)
 {
-    subOdomTruth = nh_.subscribe("odometry/truth", 1000, &SensorPitchController::odometryTruthCallback, this);
+    subOdometry = nh_.subscribe("localization/odometry/sensor_fusion", 1000, &SensorPitchController::odometryCallback, this);
     pubSensorJoint = nh_.advertise<motion_control::SensorJoint>("sensor_joint_angle", 1000);
 }
 
-void SensorPitchController::odometryTruthCallback(const nav_msgs::Odometry::ConstPtr &msg)
+void SensorPitchController::odometryCallback(const nav_msgs::Odometry::ConstPtr &msg)
 {
     tf::Quaternion q(
                     msg->pose.pose.orientation.x,

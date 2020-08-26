@@ -34,12 +34,12 @@ private:
     ros::Publisher pubSensorJoint;
 
     // Subscriber
-    ros::Subscriber subOdomTruth;
+    ros::Subscriber subOdometry;
     // ros::Subscriber subJointStates;
 
     // void doCalculations();
     // Callback function for subscribers.
-    void odometryTruthCallback(const nav_msgs::Odometry::ConstPtr &msg);
+    void odometryCallback(const nav_msgs::Odometry::ConstPtr &msg);
 
     double roll_, pitch_, yaw_;
  
