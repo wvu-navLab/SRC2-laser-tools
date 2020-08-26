@@ -3,7 +3,7 @@
 <launch>
   <group ns="scout_1">
     <param name="/use_sim_time" value="true"/>
-    <node name="locationOfBaseService" pkg="range_to_base" type="locationOfBaseService.py" output="screen">
+    <node name="rangeToBaseService" pkg="range_to_base" type="rangeToBaseService.py" output="screen">
     </node>
   </group>
 </launch>

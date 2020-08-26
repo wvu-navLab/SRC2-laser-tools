@@ -1,5 +1,5 @@
 #!/usr/bin/env python
- 
+
 import rospy
 import sensor_msgs.point_cloud2 as pc2
 from geometry_msgs.msg import Pose
@@ -48,10 +48,10 @@ def range(mess):
 
     # call rotate in place service
 
-    
+
     # call the point cloud
-    rospy.wait_for_service("/scout_1/scan_to_cloud")
-    clouder = rospy.ServiceProxy("/scout_1/scan_to_cloud", ScanToPointCloud2);
+    rospy.wait_for_service("scan_to_cloud")
+    clouder = rospy.ServiceProxy("scan_to_cloud", ScanToPointCloud2);
     resp_cloud = clouder(mess.angle,mess.angle, 1, 10);
 
 
@@ -80,7 +80,7 @@ def range(mess):
     	xc_2, yc_2 = center_final_est
 
     	residu_2   = sum((R_est - R_avg)**2)
-    # if least squares fit circle fit fails, assume robot is outside the crater   
+    # if least squares fit circle fit fails, assume robot is outside the crater
     except TypeError:
         ier=-1
     # if least squares circle fit succeeds, test further
@@ -95,13 +95,13 @@ def range(mess):
 		returnVal=rangeMeas
                 return returnVal
         else:
-                
+
                 rangeMeas.range = 999.99
 
                 returnVal=rangeMeas
                 return returnVal
 
-	
+
 
 
 rospy.init_node('range_to_base')
