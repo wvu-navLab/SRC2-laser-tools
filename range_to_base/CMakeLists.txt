@@ -13,6 +13,7 @@ find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
   sensor_msgs
   laser_tools_src2
+  pcl_obstacle_detection
 )
 
 ## System dependencies are found with CMake's conventions
@@ -109,7 +110,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 # LIBRARIES laser_tools_src2
-  CATKIN_DEPENDS laser_tools_src2  
+  CATKIN_DEPENDS laser_tools_src2
 #  DEPENDS system_lib
 )
 
