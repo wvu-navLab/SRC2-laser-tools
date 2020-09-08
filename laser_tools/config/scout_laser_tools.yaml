@@ -2,4 +2,3 @@ robot_name: "scout_1"
 # imu_topic_name : "/scout_1/imu"
 cloud_topic_name: "/scout_1/cloud"
 sensor_control_topic_name: "/scout_1/sensor_controller/command"
-
