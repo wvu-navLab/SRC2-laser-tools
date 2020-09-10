@@ -17,6 +17,7 @@ find_package(catkin REQUIRED COMPONENTS
   srcp2_msgs
   nav_msgs
   tf
+  motion_control
 )
 
 ## System dependencies are found with CMake's conventions
