@@ -62,7 +62,30 @@ def range(mess):
     cloud_filter = rospy.ServiceProxy("homing_filter", HomingFilter);
     resp_cloud_filtered = cloud_filter(resp_cloud.cloud);
 
+    if( not resp_cloud_filtered.success):
+            rospy.logerr(" Empty Cloud, Increasing Look Angle")
+            rospy.wait_for_service("scan_to_cloud")
+            clouder = rospy.ServiceProxy("scan_to_cloud", ScanToPointCloud2);
+            resp_cloud = clouder(mess.angle,mess.angle+.2, 3, 1);
 
+            rospy.wait_for_service("homing_filter")
+            cloud_filter = rospy.ServiceProxy("homing_filter", HomingFilter);
+            resp_cloud_filtered = cloud_filter(resp_cloud.cloud);
+
+    if(not resp_cloud_filtered.success):
+            rospy.logerr(" Empty Cloud, Decreasing Look Angle")
+            rospy.wait_for_service("scan_to_cloud")
+            clouder = rospy.ServiceProxy("scan_to_cloud", ScanToPointCloud2);
+            resp_cloud = clouder(mess.angle,mess.angle-.2, 3, 1);
+
+            rospy.wait_for_service("homing_filter")
+            cloud_filter = rospy.ServiceProxy("homing_filter", HomingFilter);
+            resp_cloud_filtered = cloud_filter(resp_cloud.cloud);
+
+
+    if(not resp_cloud_filtered.success):
+        rospy.logerr(" Still Empty Cloud, Giving Unfiltered Cloud ")
+        resp_cloud_filtered.cloud = resp_cloud.cloud
 
     # convert it to a generator of the individual points
     point_generator = pc2.read_points(resp_cloud_filtered.cloud)
