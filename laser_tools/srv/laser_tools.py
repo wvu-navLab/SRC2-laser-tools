@@ -49,7 +49,7 @@ rospy.init_node(node)
 robot = rospy.get_param(node+"/robot_name")
 rospy.get_param(node+"/cloud_topic_name")
 
-service=rospy.Service(robot+'/scan_to_cloud',ScanToPointCloud2,tiltLidar)
+service=rospy.Service('scan_to_cloud',ScanToPointCloud2,tiltLidar)
 
 rospy.spin()
 
