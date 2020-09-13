@@ -50,7 +50,7 @@ def range(mess):
 
 
     # call rotate in place service
-
+    print "In the Location of Base Service"
 
     # call the point cloud
     rospy.wait_for_service("scan_to_cloud")
@@ -66,7 +66,7 @@ def range(mess):
             rospy.logerr(" Empty Cloud, Increasing Look Angle")
             rospy.wait_for_service("scan_to_cloud")
             clouder = rospy.ServiceProxy("scan_to_cloud", ScanToPointCloud2);
-            resp_cloud = clouder(mess.angle,mess.angle+.2, 3, 1);
+            resp_cloud = clouder(mess.angle,mess.angle+.3, 3, 1);
 
             rospy.wait_for_service("homing_filter")
             cloud_filter = rospy.ServiceProxy("homing_filter", HomingFilter);
@@ -76,7 +76,7 @@ def range(mess):
             rospy.logerr(" Empty Cloud, Decreasing Look Angle")
             rospy.wait_for_service("scan_to_cloud")
             clouder = rospy.ServiceProxy("scan_to_cloud", ScanToPointCloud2);
-            resp_cloud = clouder(mess.angle,mess.angle-.2, 3, 1);
+            resp_cloud = clouder(mess.angle,mess.angle-.3, 3, 1);
 
             rospy.wait_for_service("homing_filter")
             cloud_filter = rospy.ServiceProxy("homing_filter", HomingFilter);

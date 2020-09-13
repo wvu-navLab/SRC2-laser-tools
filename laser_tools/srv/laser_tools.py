@@ -13,7 +13,7 @@ def tiltLidar(mess):
     print rospy.get_param(node+"/sensor_control_topic_name")
     pub = rospy.Publisher(rospy.get_param(node+"/sensor_control_topic_name"),Float64, queue_size=1)
     pub_cloud = rospy.Publisher(rospy.get_param(node+"/cloud_topic_name"),PointCloud2, queue_size=1)
-    
+
     minAngle = float(mess.minAngle)
     maxAngle = float(mess.maxAngle)
     steps = mess.numAngleSteps
@@ -33,13 +33,13 @@ def tiltLidar(mess):
 
     endTime = rospy.get_rostime();
     pub.publish(0.0);
-  
+    print "finish scan loop, before assemble_scans2"
     rospy.wait_for_service("assemble_scans2")
     assembler= rospy.ServiceProxy("assemble_scans2",AssembleScans2)
-    
+    print "after scan assembler call"
 
     resp = assembler(startTime, endTime)
-    
+
     pub_cloud.publish(resp.cloud)
     return ScanToPointCloud2Response(resp.cloud)
 
@@ -52,4 +52,3 @@ rospy.get_param(node+"/cloud_topic_name")
 service=rospy.Service('scan_to_cloud',ScanToPointCloud2,tiltLidar)
 
 rospy.spin()
-

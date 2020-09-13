@@ -1,7 +1,9 @@
 <launch>
-  <node type="laser_scan_assembler" pkg="laser_assembler" name="my_assembler">
-    <remap from="scan" to="/hauler_1/laser/scan"/>
-    <param name="max_scans" type="int" value="400" />
-    <param name="fixed_frame" type="string" value="hauler_1_tf/odom" />
-  </node>
+  <group ns="hauler_1">
+    <node type="laser_scan_assembler" pkg="laser_assembler" name="my_assembler">
+      <remap from="scan" to="laser/scan"/>
+      <param name="max_scans" type="int" value="400" />
+      <param name="fixed_frame" type="string" value="hauler_1_tf/odom" />
+    </node>
+  </group>
 </launch>
