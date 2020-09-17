@@ -146,7 +146,7 @@ include_directories(
 
 add_executable(sensor_pitch_controller src/sensor_pitch_controller.cpp)
 target_link_libraries(sensor_pitch_controller ${catkin_LIBRARIES})
-add_dependencies(sensor_pitch_controller sensor_pitch_controller_generate_messages_cpp)
+add_dependencies(sensor_pitch_controller sensor_pitch_controller_generate_messages_cpp ${catkin_EXPORTED_TARGETS})
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
