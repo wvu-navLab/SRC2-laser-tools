@@ -1,6 +1,10 @@
-float64 minAngle
-float64 maxAngle
-int16 numAngleSteps
+float64 minPitchAngle
+float64 maxPitchAngle
+float64 minYawAngle
+float64 maxYawAngle
+float64 sleepScan
+int16 numPitchSteps
+int16 numYawSteps
 int16 numRepeat
 ---
 sensor_msgs/PointCloud2 cloud

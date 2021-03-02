@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import rospy
 from std_msgs.msg import Float64
@@ -7,36 +7,60 @@ from sensor_msgs.msg import PointCloud2
 from laser_tools_src2.srv import ScanToPointCloud2, ScanToPointCloud2Response
 from laser_assembler.srv import AssembleScans2
 import roslib; roslib.load_manifest('laser_assembler')
+
 def tiltLidar(mess):
     node='laser_tools'
-    print rospy.get_param(node+"/cloud_topic_name")
-    print rospy.get_param(node+"/sensor_control_topic_name")
-    pub = rospy.Publisher(rospy.get_param(node+"/sensor_control_topic_name"),Float64, queue_size=1)
+    print(rospy.get_param(node+"/cloud_topic_name"))
+#    print rospy.get_param(node+"/sensor_control_topic_name")
+
+    pub_pitch = rospy.Publisher(rospy.get_param(node+"/sensor_pitch_control_topic_name"),Float64, queue_size=1)
+    pub_yaw = rospy.Publisher(rospy.get_param(node+"/sensor_yaw_control_topic_name"),Float64, queue_size=1)
+
     pub_cloud = rospy.Publisher(rospy.get_param(node+"/cloud_topic_name"),PointCloud2, queue_size=1)
 
-    minAngle = float(mess.minAngle)
-    maxAngle = float(mess.maxAngle)
-    steps = mess.numAngleSteps
+    minPitchAngle = float(mess.minPitchAngle)
+    maxPitchAngle = float(mess.maxPitchAngle)
+    minYawAngle = float(mess.minYawAngle)
+    maxYawAngle = float(mess.maxYawAngle)
+    pitchSteps = mess.numPitchSteps
+    yawSteps = mess.numYawSteps
     repeat = mess.numRepeat
-    angleIncrement = (maxAngle-minAngle)/float(steps);
-    print angleIncrement
+
+    pitchIncrement = (maxPitchAngle-minPitchAngle)/float(pitchSteps)
+    yawIncrement = (maxYawAngle-minYawAngle)/float(yawSteps)
+
+    sleep = mess.sleepScan
+
     for j in range(repeat):
-        Angle = minAngle
-        for i in range(steps):
-            pub.publish(Angle);
-            rospy.sleep(2.0)
-            if(j==0 and i ==0):
-                startTime = rospy.get_rostime()
-            print Angle
-            print steps
-            Angle=Angle + angleIncrement
+        if(j==0):
+            startTime = rospy.get_rostime()
+        pitch = minPitchAngle
+        for i in range(pitchSteps):
+            pub_pitch.publish(pitch)
+            rospy.sleep(sleep)
+
+            pitch = pitch +pitchIncrement
+
+            yaw = minYawAngle
+            for k in range(yawSteps):
+                pub_yaw.publish(yaw)
+                rospy.sleep(sleep)
+
+                yaw = yaw +yawIncrement
+
+                
+
+
+
 
     endTime = rospy.get_rostime();
-    pub.publish(0.0);
-    print "finish scan loop, before assemble_scans2"
+    pub_pitch.publish(0.0);
+    pub_yaw.publish(0.0);
+
+    print("finish scan loop, before assemble_scans2")
     rospy.wait_for_service("assemble_scans2")
     assembler= rospy.ServiceProxy("assemble_scans2",AssembleScans2)
-    print "after scan assembler call"
+    print("after scan assembler call")
 
     resp = assembler(startTime, endTime)
 
