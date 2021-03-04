@@ -14,7 +14,7 @@ SensorPitchController::SensorPitchController(ros::NodeHandle & nh)
 : nh_(nh)
 {
     subOdometry = nh_.subscribe("localization/odometry/sensor_fusion", 1000, &SensorPitchController::odometryCallback, this);
-    pubSensorJoint = nh_.advertise<motion_control::SensorJoint>("sensor_joint_angle", 1000);
+    pubSensorJoint = nh_.advertise<motion_control::SensorGroup>("sensor_joint_angle", 1000);
 }
 
 void SensorPitchController::odometryCallback(const nav_msgs::Odometry::ConstPtr &msg)
@@ -43,7 +43,7 @@ void SensorPitchController::controlSensor()
 
     // double j1 = Kp_*(sensor_joint_cmd_ - sensor_joint_current_);
 
-    motion_control::SensorJoint j;
+    motion_control::SensorGroup j;
 
     j.j1 = sensor_joint_cmd_; 
 
