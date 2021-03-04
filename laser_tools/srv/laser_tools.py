@@ -32,8 +32,7 @@ def tiltLidar(mess):
     sleep = mess.sleepScan
 
     for j in range(repeat):
-        if(j==0):
-            startTime = rospy.get_rostime()
+
         pitch = minPitchAngle
         for i in range(pitchSteps):
             pub_pitch.publish(pitch)
@@ -47,12 +46,13 @@ def tiltLidar(mess):
                 rospy.sleep(sleep)
 
                 yaw = yaw +yawIncrement
-
-                
-
-
+                if(j==0 and i==0 and k==0):
+                    startTime = rospy.get_rostime()
 
 
+
+
+    rospy.sleep(sleep)s
     endTime = rospy.get_rostime();
     pub_pitch.publish(0.0);
     pub_yaw.publish(0.0);
