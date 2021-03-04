@@ -1,9 +1,9 @@
 <launch>
- <group ns="excavator_1">
+ <group ns="small_excavator_1">
    <node type="laser_scan_assembler" pkg="laser_assembler" name="my_assembler">
      <remap from="scan" to="laser/scan"/>
      <param name="max_scans" type="int" value="400" />
-     <param name="fixed_frame" type="string" value="excavator_1_tf/odom" />
+     <param name="fixed_frame" type="string" value="small_excavator_1_tf/odom" />
    </node>
   </group>
 </launch>
