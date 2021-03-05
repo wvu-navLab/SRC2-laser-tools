@@ -52,7 +52,7 @@ def tiltLidar(mess):
 
 
 
-    rospy.sleep(sleep)s
+    rospy.sleep(sleep)
     endTime = rospy.get_rostime();
     pub_pitch.publish(0.0);
     pub_yaw.publish(0.0);
