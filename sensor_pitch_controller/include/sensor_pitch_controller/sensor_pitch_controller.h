@@ -21,7 +21,7 @@
 #include <tf/tf.h>
 
 // Custom message includes. Auto-generated from msg/ directory.
-#include <motion_control/SensorJoint.h>
+#include <motion_control/SensorGroup.h>
 #include <nav_msgs/Odometry.h>
 #include <sensor_msgs/JointState.h>
 
