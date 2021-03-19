@@ -12,7 +12,7 @@ import numpy as np
 
 from range_to_base.srv import LocationOfBase, LocationOfBaseResponse
 from laser_tools_src2.srv import ScanToPointCloud2
-#from pcl_obstacle_detection.srv import HomingFilter
+from pcl_obstacle_detection.srv import HomingFilter
 
 ####### circle fit code ##########
 # https://scipy-cookbook.readthedocs.io/items/Least_Squares_Circle.html
