@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import rospy
 import sensor_msgs.point_cloud2 as pc2
@@ -74,8 +74,8 @@ def range(mess):
     center_estimate = x_m, y_m
     ## try the least squares fit to a circle
     try:
-        center_final_est, ier = optimize.leastsq(f_2b, center_estimate, Dfun=Df_2b, col_deriv=True)
- 	R_est = calc_R(*center_final_est)
+    	center_final_est, ier = optimize.leastsq(f_2b, center_estimate, Dfun=Df_2b, col_deriv=True)
+    	R_est = calc_R(*center_final_est)
     	R_avg= R_est.mean()
     	xc_2, yc_2 = center_final_est
 
@@ -85,21 +85,21 @@ def range(mess):
         ier=-1
     # if least squares circle fit succeeds, test further
     if ier>0:
-	xx=np.mean(xc_2)
-	yy=np.mean(yc_2)
-        print 'Time: %5.2f Rad: %5.2f cen: %5.2f %5.2f Res: %5.2f'%(resp_cloud.cloud.header.stamp.to_sec(),R_avg, np.mean(xc_2), np.mean(yc_2),residu_2)
+        xx=np.mean(xc_2)
+        yy=np.mean(yc_2)
+        print('Time: %5.2f Rad: %5.2f cen: %5.2f %5.2f Res: %5.2f'%resp_cloud.cloud.header.stamp.to_sec(),R_avg, np.mean(xc_2), np.mean(yc_2),residu_2)
         rangeMeas.range =  np.sqrt(np.mean(xc_2)**2+np.mean(yc_2)**2)
         rangeMeas.header.stamp = rospy.Time.now()
-	# check for 'goodness of fit' by looking at size of radius, residuals, x, y
-	if residu_2<1000:
-		returnVal=rangeMeas
-                return returnVal
-        else:
+    # check for 'goodness of fit' by looking at size of radius, residuals, x, y
+    if residu_2<1000:
+        returnVal=rangeMeas
+        return returnVal
+    else:
 
-                rangeMeas.range = 999.99
+        rangeMeas.range = 999.99
 
-                returnVal=rangeMeas
-                return returnVal
+        returnVal=rangeMeas
+        return returnVal
 
 
 

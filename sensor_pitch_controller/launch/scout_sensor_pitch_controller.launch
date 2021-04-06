@@ -1,5 +1,5 @@
 <launch> 
-  <group ns="scout_1">
+  <group ns="small_scout_1">
     
     <node pkg="sensor_pitch_controller"
           name="sensor_pitch_controller"
