@@ -1,4 +1,4 @@
-robot_name: "hauler_1"
+robot_name: "small_hauler_1"
 # imu_topic_name : "/hauler_1/imu"
-cloud_topic_name: "/hauler_1/cloud"
+cloud_topic_name: "/small_hauler_1/cloud"
 sensor_control_topic_name: "/hauler_1/sensor_controller/command"
