@@ -14,6 +14,9 @@ find_package(catkin REQUIRED
   geometry_msgs
   nav_msgs
   tf2_ros
+  sensor_msgs
+  laser_tools_src2
+  pcl_obstacle_detection
 )
 
 ## System dependencies are found with CMake's conventions
@@ -57,11 +60,10 @@ find_package(catkin REQUIRED
 # )
 
 ## Generate services in the 'srv' folder
-# add_service_files(
-#   FILES
-#   Service1.srv
-#   Service2.srv
-# )
+add_service_files(
+   FILES
+   RangeToRover.srv
+ )
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -76,6 +78,8 @@ find_package(catkin REQUIRED
    std_msgs  # Or other packages containing msgs
    geometry_msgs
    nav_msgs
+   sensor_msgs
+   laser_tools_src2
 )
 
 ################################################
