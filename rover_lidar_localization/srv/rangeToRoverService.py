@@ -97,7 +97,7 @@ def range(mess):
         centroid = np.mean(points, axis=1)
 
         if (centroid[2] > min_height_thresh) and (centroid[2] < max_height_thresh):
-            rangeMeas.range = np.sqrt(np.mean(xc_2)**2+np.mean(yc_2)**2)
+            rangeMeas.range = LA.norm(centroid)
             rangeMeas.header.stamp = rospy.Time.now()
 
     returnVal = rangeMeas
