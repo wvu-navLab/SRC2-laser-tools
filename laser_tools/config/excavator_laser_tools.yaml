@@ -1,4 +1,6 @@
 robot_name: "small_excavator_1"
 # imu_topic_name : "/excavator_1/imu"
 cloud_topic_name: "/small_excavator_1/cloud"
-sensor_control_topic_name: "/excavator_1/sensor_controller/command"
+#sensor_control_topic_name: "/excavator_1/sensor_controller/command"
+sensor_pitch_control_topic_name: "/small_excavator_1/sensor/pitch/command/position"
+sensor_yaw_control_topic_name: "/small_excavator_1/sensor/yaw/command/position"
