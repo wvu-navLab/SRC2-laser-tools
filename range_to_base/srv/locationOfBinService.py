@@ -55,7 +55,7 @@ def range(mess):
     # call the point cloud
     rospy.wait_for_service("scan_to_cloud")
     clouder = rospy.ServiceProxy("scan_to_cloud", ScanToPointCloud2);
-    resp_cloud = clouder(mess.angle,mess.angle,0,0,1,2, 1, 1);
+    resp_cloud = clouder(mess.angle,mess.angle,0,0,1,1,1,1);
 
      #filter the PointCloud
     rospy.wait_for_service("homing_filter")
@@ -119,8 +119,8 @@ def range(mess):
         xx=np.mean(xc_2)
         yy=np.mean(yc_2)
         print ('Time: %5.2f Rad: %5.2f cen: %5.2f %5.2f Res: %5.2f',resp_cloud.cloud.header.stamp.to_sec(),R_avg, np.mean(xc_2), np.mean(yc_2),residu_2)
-        locationMeas.x =  np.mean(xc_2)
-        locationMeas.y =  np.mean(yc_2)
+        locationMeas.x =  x_m     # CHANGE to only use average instead of circle fit
+        locationMeas.y =  y_m      # CHANGE to only use average instead of circle fit
 
 	# check for 'goodness of fit' by looking at size of radius, residuals, x, y
         if residu_2<1000:
