@@ -61,6 +61,7 @@ find_package(catkin REQUIRED COMPONENTS
    FILES
    RangeToBase.srv
    LocationOfBase.srv
+   LocationOfBin.srv
  )
 
 ## Generate actions in the 'action' folder
@@ -76,6 +77,7 @@ find_package(catkin REQUIRED COMPONENTS
    geometry_msgs # Or other packages containing msgs
    sensor_msgs
    laser_tools_src2
+   std_msgs
  )
 
 ################################################

@@ -10,7 +10,7 @@ import math
 from scipy import optimize
 import numpy as np
 
-from range_to_base.srv import LocationOfBase, LocationOfBaseResponse
+from range_to_base.srv import LocationOfBin, LocationOfBinResponse
 from laser_tools_src2.srv import ScanToPointCloud2
 from pcl_obstacle_detection.srv import HomingFilter
 
@@ -104,40 +104,46 @@ def range(mess):
     y_m = np.mean(y)
 
     center_estimate = x_m, y_m
-    ## try the least squares fit to a circle
-    try:
-        center_final_est, ier = optimize.leastsq(f_2b, center_estimate, Dfun=Df_2b, col_deriv=True)
-        R_est = calc_R(*center_final_est)
-        R_avg= R_est.mean()
-        xc_2, yc_2 = center_final_est
-        residu_2   = sum((R_est - R_avg)**2)
-    # if least squares fit circle fit fails, assume robot is outside the crater
-    except TypeError:
-        ier=-1
-    # if least squares circle fit succeeds, test further
-    if ier>0:
-        xx=np.mean(xc_2)
-        yy=np.mean(yc_2)
-        print ('Time: %5.2f Rad: %5.2f cen: %5.2f %5.2f Res: %5.2f',resp_cloud.cloud.header.stamp.to_sec(),R_avg, np.mean(xc_2), np.mean(yc_2),residu_2)
-        locationMeas.x =  x_m     # CHANGE to only use average instead of circle fit
-        locationMeas.y =  y_m      # CHANGE to only use average instead of circle fit
+    locationMeas.x =  x_m     # CHANGE to only use average instead of circle fit
+    locationMeas.y =  y_m 
+    pub.publish(locationMeas)
+    returnVal = locationMeas
+    return returnVal
 
-	# check for 'goodness of fit' by looking at size of radius, residuals, x, y
-        if residu_2<1000:
-            returnVal=locationMeas
-            pub.publish(locationMeas)
-            return returnVal
-        else:
-            locationMeas.x = 999.99
-            locationMeas.y = 999.99
-            returnVal=locationMeas
-            return returnVal
+    ## try the least squares fit to a circle
+ #    try:
+ #        center_final_est, ier = optimize.leastsq(f_2b, center_estimate, Dfun=Df_2b, col_deriv=True)
+ #        R_est = calc_R(*center_final_est)
+ #        R_avg= R_est.mean()
+ #        xc_2, yc_2 = center_final_est
+ #        residu_2   = sum((R_est - R_avg)**2)
+ #    # if least squares fit circle fit fails, assume robot is outside the crater
+ #    except TypeError:
+ #        ier=-1
+ #    # if least squares circle fit succeeds, test further
+ #    if ier>0:
+ #        xx=np.mean(xc_2)
+ #        yy=np.mean(yc_2)
+ #        print ('Time: %5.2f Rad: %5.2f cen: %5.2f %5.2f Res: %5.2f',resp_cloud.cloud.header.stamp.to_sec(),R_avg, np.mean(xc_2), np.mean(yc_2),residu_2)
+ #        locationMeas.x =  x_m     # CHANGE to only use average instead of circle fit
+ #        locationMeas.y =  y_m      # CHANGE to only use average instead of circle fit
+
+	# # check for 'goodness of fit' by looking at size of radius, residuals, x, y
+ #        if residu_2<1000:
+ #            returnVal=locationMeas
+ #            pub.publish(locationMeas)
+ #            return returnVal
+ #        else:
+ #            locationMeas.x = 999.99
+ #            locationMeas.y = 999.99
+ #            returnVal=locationMeas
+ #            return returnVal
 
 
 
 
 rospy.init_node('location_of_bin')
 
-service=rospy.Service('location_of_bin_service',LocationOfBase,range)
+service=rospy.Service('location_of_bin_service',LocationOfBin,range)
 
 rospy.spin()
