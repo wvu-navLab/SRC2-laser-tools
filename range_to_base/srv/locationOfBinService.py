@@ -5,6 +5,7 @@ import sensor_msgs.point_cloud2 as pc2
 from geometry_msgs.msg import Pose
 from geometry_msgs.msg import Point
 from sensor_msgs.msg import PointCloud2
+from std_msgs.msg import Bool
 #import laser_geometry.laser_geometry as lg
 import math
 from scipy import optimize
@@ -108,7 +109,9 @@ def range(mess):
     locationMeas.y =  y_m 
     pub.publish(locationMeas)
     returnVal = locationMeas
-    return returnVal
+    success = Bool()
+    success.data = True
+    return returnVal, success
 
     ## try the least squares fit to a circle
  #    try:
