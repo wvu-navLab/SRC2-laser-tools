@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <launch>
-  <include file="$(find laser_tools_src2)/launch/hauler_scan_assemble.launch"/>
+  <include file="$(find laser_tools_src2)/launch/hauler2_scan_assemble.launch"/>
 
   <node name="laser_tools" pkg="laser_tools_src2" type="laser_tools.py" output="screen">
     <rosparam
       command="load"
-      file="$(find laser_tools_src2)/config/hauler_laser_tools.yaml"
+      file="$(find laser_tools_src2)/config/hauler2_laser_tools.yaml"
       subst_value="true"
     />
   </node>

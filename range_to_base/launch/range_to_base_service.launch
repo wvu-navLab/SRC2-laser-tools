@@ -1,9 +1,8 @@
 <?xml version="1.0"?>
 
 <launch>
-  <group ns="small_hauler_1">
-    <param name="/use_sim_time" value="true"/>
+
     <node name="rangeToBaseService" pkg="range_to_base" type="rangeToBaseService.py" output="screen">
     </node>
-  </group>
+
 </launch>
