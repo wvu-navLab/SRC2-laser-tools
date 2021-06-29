@@ -14,6 +14,7 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   laser_tools_src2
   pcl_obstacle_detection
+  std_msgs
 )
 
 ## System dependencies are found with CMake's conventions

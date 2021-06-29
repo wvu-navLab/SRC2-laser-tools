@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<launch>
+
+    <node name="locationOfExcavatorService" pkg="range_to_base" type="locationOfExcavatorService.py" output="screen">
+    </node>
+
+</launch>

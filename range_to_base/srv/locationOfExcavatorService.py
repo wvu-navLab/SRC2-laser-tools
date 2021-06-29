@@ -5,6 +5,7 @@ import sensor_msgs.point_cloud2 as pc2
 from geometry_msgs.msg import Pose
 from geometry_msgs.msg import Point
 from sensor_msgs.msg import PointCloud2
+from std_msgs.msg import Bool
 #import laser_geometry.laser_geometry as lg
 import math
 from scipy import optimize
@@ -126,7 +127,9 @@ def range(mess):
         if residu_2<1000:
             returnVal=locationMeas
             pub.publish(locationMeas)
-            return returnVal
+            success = Bool()
+            success.data = True
+            return returnVal, success
         else:
             locationMeas.x = 999.99
             locationMeas.y = 999.99
