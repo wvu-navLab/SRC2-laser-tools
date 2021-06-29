@@ -61,6 +61,7 @@ find_package(catkin REQUIRED COMPONENTS
    FILES
    RangeToBase.srv
    LocationOfBase.srv
+   LocationOfExcavator.srv
    LocationOfBin.srv
  )
 
