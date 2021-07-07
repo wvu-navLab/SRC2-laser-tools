@@ -160,10 +160,10 @@ include_directories(
 
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
-install(PROGRAMS
+install(PROGRAMS srv/laser_tools.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
-
+catkin_install_python(PROGRAMS srv/laser_tools.py DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
 install(DIRECTORY config/
     DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/config
