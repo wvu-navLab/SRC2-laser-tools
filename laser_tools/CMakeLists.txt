@@ -169,7 +169,7 @@ install(DIRECTORY config/
     DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/config
     PATTERN ".svn" EXCLUDE)
 install(DIRECTORY launch/
-	DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+	DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch)
 
 ## Mark libraries for installation
 ## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_libraries.html
@@ -190,7 +190,7 @@ install(DIRECTORY launch/
 # install(FILES
 #   # myfile1
 #   # myfile2
-#   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+#   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
 # )
 
 #############
