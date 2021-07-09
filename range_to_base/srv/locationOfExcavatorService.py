@@ -123,8 +123,9 @@ def range(mess):
         locationMeas.x =  np.mean(xc_2)
         locationMeas.y =  np.mean(yc_2)
 
+        SANITY=200.0
 	# check for 'goodness of fit' by looking at size of radius, residuals, x, y
-        if residu_2<100:
+        if residu_2<SANITY/2 and abs(locationMeas.x)<SANITY and abs(locationMeas.y)<SANITY :
             returnVal=locationMeas
             pub.publish(locationMeas)
             success = Bool()
