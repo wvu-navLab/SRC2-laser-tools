@@ -132,8 +132,8 @@ def range(mess):
             success.data = True
             return returnVal, success
         else:
-            locationMeas.x = 999.99
-            locationMeas.y = 999.99
+            #locationMeas.x = 999.99
+            #locationMeas.y = 999.99
             returnVal=locationMeas
             success = Bool()
             success.data = False
