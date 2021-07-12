@@ -137,7 +137,7 @@ def range(mess):
             returnVal=locationMeas
             success = Bool()
             success.data = False
-            return returnVal, sucess
+            return returnVal, success
 
 
 
