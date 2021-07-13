@@ -56,7 +56,7 @@ def range(mess):
     # call the point cloud
     rospy.wait_for_service("scan_to_cloud")
     clouder = rospy.ServiceProxy("scan_to_cloud", ScanToPointCloud2);
-    resp_cloud = clouder(mess.angle,-mess.angle,0,0,1,4, 1, 1);
+    resp_cloud = clouder(mess.center+mess.offset,mess.center-offset,0,0,1,5, 1, 1);
 
      #filter the PointCloud
     rospy.wait_for_service("homing_filter")

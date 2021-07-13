@@ -1,6 +1,6 @@
 std_msgs/Bool location_of_excavator
-float64 angle
+float64 center
+float64 offset
 ---
 geometry_msgs/Point excavator_location
 std_msgs/Bool success
-
