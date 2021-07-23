@@ -123,7 +123,7 @@ def range(mess):
         locationMeas.y =  np.mean(yc_2)
 
 	# check for 'goodness of fit' by looking at size of radius, residuals, x, y
-        if residu_2<1000:
+        if residu_2<1000 and (R_avg < 5.0) or (R_avg > 2.2):
             returnVal=locationMeas
             pub.publish(locationMeas)
             return returnVal
