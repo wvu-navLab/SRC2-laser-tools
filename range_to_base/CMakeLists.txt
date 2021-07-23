@@ -64,6 +64,7 @@ find_package(catkin REQUIRED COMPONENTS
    LocationOfBase.srv
    LocationOfExcavator.srv
    LocationOfBin.srv
+   LocationOfProcessingPlant.srv
  )
 
 ## Generate actions in the 'action' folder
