@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<launch>
+
+    <node name="locationOfProcessingPlantService" pkg="range_to_base" type="locationOfProcessingPlantService.py" output="screen">
+    </node>
+
+</launch>
