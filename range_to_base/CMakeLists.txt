@@ -194,7 +194,7 @@ install(DIRECTORY launch/
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION}
 # )
-catkin_install_python(PROGRAMS srv/rangeToBaseService.py srv/locationOfBaseService.py srv/locationOfBinService.py srv/locationOfExcavatorService.py DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+catkin_install_python(PROGRAMS srv/rangeToBaseService.py srv/locationOfBaseService.py srv/locationOfBinService.py srv/locationOfProcessingPlantService.py srv/locationOfExcavatorService.py DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
 ## Mark cpp header files for installation
  install(DIRECTORY include/${PROJECT_NAME}/
