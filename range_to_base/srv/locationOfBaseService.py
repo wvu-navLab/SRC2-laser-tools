@@ -55,7 +55,7 @@ def range(mess):
     # call the point cloud
     rospy.wait_for_service("scan_to_cloud")
     clouder = rospy.ServiceProxy("scan_to_cloud", ScanToPointCloud2);
-    resp_cloud = clouder(mess.angle,mess.angle,0,0,1,2, 1, 1);
+    resp_cloud = clouder(0,mess.angle,0,0,.5,4, 1, 2)
 
      #filter the PointCloud
     rospy.wait_for_service("homing_filter")
@@ -118,7 +118,8 @@ def range(mess):
     if ier>0:
         xx=np.mean(xc_2)
         yy=np.mean(yc_2)
-        print ('Time: %5.2f Rad: %5.2f cen: %5.2f %5.2f Res: %5.2f',resp_cloud.cloud.header.stamp.to_sec(),R_avg, np.mean(xc_2), np.mean(yc_2),residu_2)
+
+        print ("[LASER HOMING SERVICE] Time: %5.2f Radius: %5.2f cen: %5.2f %5.2f Resid: %5.2f" % (resp_cloud.cloud.header.stamp.to_sec(),R_avg, np.mean(xc_2), np.mean(yc_2),residu_2))
         locationMeas.x =  np.mean(xc_2)
         locationMeas.y =  np.mean(yc_2)
 
